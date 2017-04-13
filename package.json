@@ -1,0 +1,35 @@
+{
+  "name": "luizalabs-hapi-decorator",
+  "version": "1.0.4",
+  "description": "Respose decorator in Luizalabs' pattern",
+  "main": "index.js",
+  "scripts": {
+    "generate-docs": "node_modules/.bin/jsdoc  --readme ./readme.md -c jsdoc.json",
+    "test": "scripts/test"
+  },
+  "author": {
+    "name": "Aldo Oliveira",
+    "email": "aldo.oliveira@luizalabs.com",
+    "url": "https://github.com/aldooliveira-luizalabs"
+  },
+  "repository": {
+    "url": "https://github.com/luizalabs/luizalabs-hapi-decorator"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.appsluiza.com.br/repository/npm/",
+    "scope": "luizalabs"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "boom": "4.2.0",
+    "hapi": "15.2.0",
+    "hapi-boom-decorators": "2.1.0",
+    "lodash": "4.16.6",
+    "semistandard": "9.1.0"
+  },
+  "devDependencies": {
+    "docdash": "0.4.0",
+    "eslint-plugin-angular": "^1.4.1",
+    "jsdoc": "3.4.3"
+  }
+}
