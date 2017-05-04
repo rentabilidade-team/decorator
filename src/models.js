@@ -43,23 +43,16 @@ function ResponseModel (data, limit, offset) {
   self.meta.limit = offset || 50;
   self.meta.recordCount = 0;
 
-  self.setRecords = (data) => {
-    if (data) {
-      data = data instanceof Array ? data : [data];
-      data = data.map((each) => each.toJSON ? each.toJSON() : each);
-
-      self.records = data;
-    } else {
-      self.records = [];
-    }
-
-    self.meta.recordCount = self.records.length;
-  };
-
   if (data) {
-    self.setRecords(data);
+    data = data instanceof Array ? data : [data];
+    data = data.map((each) => each.toJSON ? each.toJSON() : each);
+
+    self.records = data;
+  } else {
+    self.records = [];
   }
 
+  self.meta.recordCount = self.records.length;
   jsonHelper.clearJson(self);
   return self;
 }

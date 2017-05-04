@@ -1,6 +1,6 @@
 {
   "name": "luizalabs-hapi-decorator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Respose decorator in Luizalabs' pattern",
   "main": "index.js",
   "scripts": {
