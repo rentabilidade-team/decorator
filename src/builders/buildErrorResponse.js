@@ -56,6 +56,7 @@ function buildJoiErrors (response) {
       errorResponse.userMessage = detail.path + ' ' + compiled(detail.context);
 
       errorResponse.errorCode = response.output.statusCode;
+      errorResponse.moreInfo = 'http://dev-magazineluiza.devportal.apigee.com/codigos-de-erro';
 
       errors.push(errorResponse);
     });
