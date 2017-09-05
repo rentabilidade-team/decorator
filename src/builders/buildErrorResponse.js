@@ -10,26 +10,28 @@
  */
 
 const _ = require('lodash');
-const joiHelper = require('../helpers/joi-helper');
+// const joiHelper = require('../helpers/joi-helper');
 const models = require('../models');
+const joiHelperNameDefault = '../helpers/joi-helper';
 
-const multiErrors = false;
+// const multiErrors = false;
 
 /**
  * Creates the error response body following the standards
  * @param {object} response - Response of the controllers of the Api methods
  * @return {ErrorResponseModel}
  */
-module.exports.build = (response) => {
+module.exports.build = (response, options) => {
   let newResponse = {};
 
   if (response.data && response.data.details) {
-    newResponse = buildJoiErrors(response);
+    newResponse = buildJoiErrors(response, options.globalization);
   } else {
     newResponse = buildGenericErrors(response);
   }
 
   newResponse = newResponse instanceof Array ? newResponse : [newResponse];
+  let multiErrors = options.multiErrors || false;
 
   if (multiErrors) {
     return newResponse;
@@ -43,10 +45,18 @@ module.exports.build = (response) => {
  * @param {object} response - Response of the controllers of the Api methods
  * @return {ErrorResponseModel}
  */
-function buildJoiErrors (response) {
+function buildJoiErrors (response, globalization) {
   let errors = [];
 
   if (response.data && response.data.details) {
+    let joiHelperName = joiHelperNameDefault;
+
+    if (!_.isEmpty(globalization)) {
+      joiHelperName = joiHelperName + '-' + globalization;
+    }
+
+    let joiHelper = require(joiHelperName);
+
     _.forEach(response.data.details, (detail) => {
       let errorResponse = new models.ErrorResponseModel();
 

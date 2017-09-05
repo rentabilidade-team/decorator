@@ -15,10 +15,12 @@ const decorators = require('./src/decorators');
  * Method to register module in server
  */
 module.exports.register = function (server, options, next) {
+  options = options || {};
+
   server.ext('onPreResponse', (request, reply) => {
     var response = request.response;
     if (response.IsBoom || response.isBoom) {
-      let newResponse = buildResponseErrors.build(response);
+      let newResponse = buildResponseErrors.build(response, options);
       return reply(newResponse).code(response.statusCode || response.output.statusCode);
     }
     return reply.continue();
